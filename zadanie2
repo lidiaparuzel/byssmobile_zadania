@@ -2,17 +2,17 @@ import UIKit
 
 class CheckListElement {
     var textField: String
-    var ifDone: Bool
+    var isDone: Bool
     var weekDay: Int
     
     init(){
         textField = ""
-        ifDone = false
+        isDone = false
         weekDay = Calendar.current.component(.weekday, from: Date())
     }
     init(textField: String, ifDone: Bool, weekDay: Int) {
         self.textField = textField
-        self.ifDone = ifDone
+        self.isDone = ifDone
         self.weekDay = weekDay
     }
     
@@ -20,7 +20,7 @@ class CheckListElement {
     func myDescription() -> String {
         let weekDaysNames = [2:"Poniedziałek",3:"Wtorek",4:"Środa",5:"Czwartek",6:"Piątek",7:"Sobota",1:"Niedziela"]
         func showState() -> String {
-            if self.ifDone == false {return "Do Wykonania"}
+            if self.isDone == false {return "Do Wykonania"}
             else {return "Gotowe"}
         }
         return weekDaysNames[self.weekDay]! + " " + textField + "->" + showState()
