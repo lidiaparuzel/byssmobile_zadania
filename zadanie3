@@ -1,0 +1,42 @@
+import UIKit
+
+protocol IsDoable {
+    var isDone: Bool {get set}
+}
+
+class CheckListElement: IsDoable {
+    var textField: String
+    var isDone: Bool
+    var weekDay: Int
+    
+    init(){
+        textField = ""
+        isDone = false
+        weekDay = Calendar.current.component(.weekday, from: Date())
+    }
+    init(textField: String, ifDone: Bool, weekDay: Int) {
+        self.textField = textField
+        self.isDone = ifDone
+        self.weekDay = weekDay
+    }
+    
+    func toggleStatus(status: Bool){
+        self.isDone = status
+    }
+    
+    //nazwa tej metody musiala zostac zmieniona, zeby mozliwe bylo uzycie protokolu CustomStringConvertible
+    func myDescription() -> String {
+        let weekDaysNames = [2:"Poniedziałek",3:"Wtorek",4:"Środa",5:"Czwartek",6:"Piątek",7:"Sobota",1:"Niedziela"]
+        func showState() -> String {
+            if self.isDone == false {return "Do Wykonania"}
+            else {return "Gotowe"}
+        }
+        return weekDaysNames[self.weekDay]! + " " + textField + "->" + showState()
+    }
+}
+
+extension CheckListElement: CustomStringConvertible {
+     var description: String {
+        return self.myDescription()
+       }
+}
