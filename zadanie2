@@ -1,0 +1,34 @@
+import UIKit
+
+class CheckListElement {
+    var textField: String
+    var ifDone: Bool
+    var weekDay: Int
+    
+    init(){
+        textField = ""
+        ifDone = false
+        weekDay = Calendar.current.component(.weekday, from: Date())
+    }
+    init(textField: String, ifDone: Bool, weekDay: Int) {
+        self.textField = textField
+        self.ifDone = ifDone
+        self.weekDay = weekDay
+    }
+    
+    //nazwa tej metody musiala zostac zmieniona, zeby mozliwe bylo uzycie protokolu CustomStringConvertible
+    func myDescription() -> String {
+        let weekDaysNames = [2:"Poniedziałek",3:"Wtorek",4:"Środa",5:"Czwartek",6:"Piątek",7:"Sobota",1:"Niedziela"]
+        func showState() -> String {
+            if self.ifDone == false {return "Do Wykonania"}
+            else {return "Gotowe"}
+        }
+        return weekDaysNames[self.weekDay]! + " " + textField + "->" + showState()
+    }
+}
+
+extension CheckListElement: CustomStringConvertible {
+     var description: String {
+        return self.myDescription()
+       }
+}
