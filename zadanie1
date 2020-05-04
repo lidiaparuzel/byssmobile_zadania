@@ -1,20 +1,20 @@
 class CheckListElement {
     var textField: String
-    var ifDone: Bool
+    var isDone: Bool
     
     init(){
         textField = ""
-        ifDone = false
+        isDone = false
     }
     init(textField: String, ifDone: Bool) {
         self.textField = textField
-        self.ifDone = ifDone
+        self.isDone = ifDone
     }
     
     //nazwa tej metody musiala zostac zmieniona, zeby mozliwe bylo uzycie protokolu CustomStringConvertible
     func myDescription() -> String {
         func showState() -> String {
-            if self.ifDone == false {return "Do Wykonania"}
+            if self.isDone == false {return "Do Wykonania"}
             else {return "Gotowe"}
         }
         return textField + "->" + showState()
@@ -26,5 +26,3 @@ extension CheckListElement: CustomStringConvertible {
         return self.myDescription()
        }
 }
-
-
